@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline/Online Exam System v3 (C++17)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --panel: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-heading: #f0f6fc;
+            --accent: #58a6ff;
+            --accent-green: #2ea043;
+            --accent-orange: #d29922;
+            --code-bg: #010409;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(88, 166, 255, 0.15);
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        h1 {
+            color: var(--text-heading);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p.description {
+            font-size: 1.1rem;
+            color: #8b949e;
+        }
+
+        .btn-group {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-green);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #2c974b;
+        }
+
+        .btn-secondary {
+            background-color: var(--panel);
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: #21262d;
+        }
+
+        section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: var(--text-heading);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+            color: #e6edf3;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        th {
+            color: var(--text-heading);
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        td:first-child {
+            font-family: monospace;
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            color: #8b949e;
+            font-size: 0.85rem;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">C++17 Console Prototype</span>
+        <h1>Offline / Online Exam System v3</h1>
+        <p class="description">A fault-tolerant, thread-safe exam engine featuring atomic file writes, keystream obfuscation, real-time heartbeats, and simulated cloud sync.</p>
+        
+        <div class="btn-group">
+            <a href="https://github.com" class="btn btn-primary" target="_blank">
+                <i class="fab !fa-github"></i> View Repository
+            </a>
+            <a href="#quickstart" class="btn btn-secondary">
+                <i class="fas fa-terminal"></i> Build & Run
+            </a>
+        </div>
+    </header>
+
+    <section>
+        <h2><i class="fas fa-shield-alt" style="color: var(--accent);"></i> Key System Features</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Thread-Safe Execution</h3>
+                <p>Background watchdog thread using steady clock countdown, ensuring accurate time keeping immune to system clock tampering.</p>
+            </div>
+            <div class="card">
+                <h3>Data Integrity</h3>
+                <p>Atomic file operations via temp file renaming and fail-safe file quarantine upon detected damage or tampering.</p>
+            </div>
+            <div class="card">
+                <h3>Multi-Role Access</h3>
+                <p>Role-based management (Master, Admin, Student) with dynamic one-time authentication passcodes.</p>
+            </div>
+            <div class="card">
+                <h3>Offline / Online Sync</h3>
+                <p>Automatic state detection saving progress locally while syncing securely to simulated servers when connected.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quickstart">
+        <h2><i class="fas fa-terminal" style="color: var(--accent-green);"></i> Compilation & Running</h2>
+        <p style="margin-bottom: 0.8rem;">Compile using a POSIX-compliant C++17 compiler (GCC or Clang):</p>
+        <div class="code-block">
+            g++ -std=c++17 -O2 -pthread exam_system.cpp -o exam<br>
+            ./exam
+        </div>
+    </section>
+
+    <section>
+        <h2><i class="fas fa-folder" style="color: var(--accent-orange);"></i> File Infrastructure</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Role & Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>admin.dat</td>
+                    <td>Key salt generated automatically for obfuscation key derivation.</td>
+                </tr>
+                <tr>
+                    <td>students.txt</td>
+                    <td>Registered student database and state records.</td>
+                </tr>
+                <tr>
+                    <td>questions.txt</td>
+                    <td>Question bank editable through administrative privilege.</td>
+                </tr>
+                <tr>
+                    <td>config.txt</td>
+                    <td>Exam global parameters (duration limit in minutes).</td>
+                </tr>
+                <tr>
+                    <td>answers_&lt;id&gt;.*</td>
+                    <td>Encrypted local response store per student session.</td>
+                </tr>
+                <tr>
+                    <td>lock_&lt;id&gt;.txt</td>
+                    <td>Heartbeat locking mechanism protecting against multi-login.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Built with Standard C++17 | Exam System Prototype v3</p>
+    </footer>
+</div>
+
+</body>
+</html>
